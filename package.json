@@ -1,0 +1,23 @@
+{
+  "name": "segmenter-catalyst",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@github/catalyst": "^1.6.0",
+    "@github/mini-throttle": "^2.1.1",
+    "@iamtraction/google-translate": "^2.0.1",
+    "@tykok/cedict-dictionary": "^2.6.0",
+    "comlink": "^4.4.1",
+    "lit": "^3.1.2"
+  },
+  "devDependencies": {
+    "typescript": "^5.2.2",
+    "vite": "^5.2.0"
+  }
+}

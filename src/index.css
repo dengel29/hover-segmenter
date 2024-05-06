@@ -1,0 +1,107 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+
+a:hover {
+  color: #535bf2;
+}
+
+circle {
+  transition: all 1s;
+  transform-origin: center;
+}
+
+.switch-container {
+  position: relative;
+}
+
+label {
+  position: absolute;
+  top: 0;
+  right: 0;
+  user-select: none;
+}
+
+details {
+  >p {
+    padding-inline-start: 1em;
+  }
+}
+
+body {
+  overflow-y: hidden;
+  font-size: 24px;
+}
+
+.description {
+  width: 0px;
+  font-size: smaller;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  opacity: 0;
+  transition: all 1s;
+  color: transparent;
+  text-align: left;
+  position: absolute;
+  right: 0;
+  top: 20%;
+  height: 80%;
+  padding: .6em
+}
+
+body:has(input#switch:checked) {
+  .description {
+    width: 40%;
+    background: black;
+    opacity: 1;
+    color: white;
+  }
+}
+
+label:has(input:checked) {
+
+  >svg>circle:nth-of-type(2) {
+    transition: all 1s;
+    fill: #535bf2;
+    transform: scale(1.9, 1.9)
+  }
+}
+
+h1 {
+  height: 1em;
+  display: flex;
+  justify-content: center;
+  margin-block-end: .2em
+}
+
+h2 {
+  display: flex;
+  justify-content: center;
+  font-size: medium;
+  height: 1em;
+  margin-block-start: 0em
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+}

@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vite + Lit + TS</title>
+  <link rel="stylesheet" href="./src/index.css" />
+  <script type="module" src="/src/my-element.ts"></script>
+  <script type="module" src="/src/hover-controller.ts"></script>
+  <script type="module" src="/src/hover-container.ts"></script>
+  <script type="module" src="/src/demo-container.ts"></script>
+</head>
+
+<body>
+  <demo-container>
+    <div class="switch-container">
+      <label for="switch">
+        <svg height="40px" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"
+          style="border: 1px solid #535bf2; border-radius: 50%;">
+          <circle cx="50" cy="50" r="20" fill="white" />
+          <circle cx="50" cy="50" r="10" fill="black" id="grower" />
+        </svg>
+        <input id="switch" type="checkbox" style="opacity: 0" />
+      </label>
+    </div>
+    <div class="description">
+      <h3>Intro</h3>
+      <p>This demo is a little homage to my last company, Inkah, as well as all the pop-up dictionaries I've used to
+        help me learn Chinese while scrolling on the internet.</p>
+      <p>It's also a little celebration of the <code>Intl.Segmenter</code> API <a
+          href="https://web.dev/blog/intl-segmenter">becoming available in all three major
+          browser engines</a>.</p>
+      <h3>How it's made</h3>
+      <p>There's a couple of key browser APIs needed to get this demo working.</p>
+      <p>Here, I'm using the X and Y coordinates from a <code>MouseEvent</code> and passing those to the
+        <a
+          href="https://developer.mozilla.org/en-US/docs/Web/API/Document/caretPositionFromPoint"><code>document.caretPositionFromPoint</code></a>
+        method. This returns a a <code>Range</code> object, which will
+        give you access to the DOM element underneath the cursor (the so-called
+        <code>offsetNode</code>), which in turn gives you access to the text content. That's what we need for
+        segmenting.
+      </p>
+      <p>Not only that, but you can get the <code>offset</code> which, if you are hovering over
+        a <code>textNode</code>, will tell you how many characters into the <code>textNode</code> your position is. This
+        is especially useful in Chinese.
+      </p>
+      <details>
+        <summary>A note about written Chinese, and words</summary>
+        <p>
+          Chinese words and phrases can be made up of one or more characters, but are often between one and four. There
+          are no spaces in written Chinese, so it's very important to understand the context of what you're reading,
+          since
+          3 characters side by side might mean one thing in one context, and be interpreted differently in another
+          context.
+        </p>
+      </details>
+      <p>Next, we want to use the <code>Intl.Segmenter</code> object to segment the underlying text node. By passing in
+        the text content and configuring the language and granularity, we get our segments. The <code>index</code>
+        property of each segment in the array keeps track of the starting point of the word. In other words, if the
+        <code> index</code> is 14, the 14th character in the text node is where that word starts. And that's super
+        useful information, because we can match up the <code>index</code> returned from the segmenter API with the
+        <code>offset</code> returned from the <code> caretPositionFromPoint</code> method to keep track of which
+        word/phrase/character is being hovered. That is what we finally pass to our dictionary, and highlight in big
+        text at the top.
+      </p>
+      <p>And that's all it takes! It's lovely to know how easy this is, and be able to spin up a POC in an hour, with
+        plain HTML,
+        CSS, JavaScript, a little web component help from <a href="https://catalyst.rocks/">Github Catalyst</a> and a
+        dictionary package. And it works in all browsers. Go figure.</p>
+    </div>
+    <div class="demo">
+
+
+      <hover-container data-action="">
+        <h1 style=" max-height: 5em">
+          <ruby data-target="hover-container.char">
+            big text here
+
+            <rt>minitext here
+            </rt>
+
+          </ruby>
+        </h1>
+        <h2 data-target="hover-container.english"></h2>
+
+        <hover-controller data-action="mousemove:hover-controller#getHoveredWords newstring:hover-container#bingo">
+          <p id="cool">
+            （中央社記者張祈花蓮縣23日電）花蓮縣從昨天晚間至今晨地震不斷，已造成花蓮市區2棟大樓傾倒，花蓮縣政府發布訊息指出，因應地震不斷發生，今天停班停課。
+            花蓮縣從昨晚至今晨地震不斷，中央氣象署資訊指出，其中最大的芮氏規模6.3地震發生於今天凌晨2時32分，地震深度5.5公里，最大震度花蓮縣5弱。（編輯：陳彥鈞）1130423
+          </p>
+        </hover-controller>
+      </hover-container>
+    </div>
+  </demo-container>
+</body>
+
+</html>
