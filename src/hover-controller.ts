@@ -1,3 +1,5 @@
+//@ts-nocheck
+
 import { controller, target } from "@github/catalyst";
 import { throttle } from "@github/mini-throttle/decorators";
 

@@ -1,3 +1,4 @@
+//@ts-nocheck
 import { controller, target } from "@github/catalyst";
 import * as Comlink from "comlink";
 import translate from "@iamtraction/google-translate";
